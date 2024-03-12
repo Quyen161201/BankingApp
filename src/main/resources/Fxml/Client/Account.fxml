@@ -8,50 +8,41 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="account_container_view"
-            stylesheets="@../../Styles/Account.css" xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.bankapp.Controllers.Client.AccountController">
-   <Text layoutX="21.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Checking Account"/>
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="account_container_view" stylesheets="@../../Styles/Account.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.bankapp.Controllers.Client.AccountController">
+   <Text layoutX="21.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Checking Account" />
    <VBox layoutX="14.0" layoutY="44.0" prefHeight="300.0" prefWidth="450.0" AnchorPane.topAnchor="44.0">
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Account Number"/>
-      <Label fx:id="ch_number_acc" text="3333 4000"/>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Transactions limit"/>
-      <Label fx:id="transaction_limit" text="10"/>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text created"/>
-      <Label fx:id="ch_acc_date" text="2024-03-03"/>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Balance"/>
-      <Label fx:id="ch_acc_balence" text="300.000.000 VND"/>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Account Number" />
+      <Label fx:id="ch_number_acc" text="3333 4000" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Transactions limit" />
+      <Label fx:id="transaction_limit" text="10" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text created" />
+      <Label fx:id="ch_acc_date" text="2024-03-03" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Balance" />
+      <Label fx:id="ch_acc_balence" text="300.000.000 VND" />
    </VBox>
-   <Text layoutX="21.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saving account"
-         AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="353.0"/>
-   <VBox layoutX="14.0" layoutY="370.0" prefHeight="300.0" prefWidth="450.0" AnchorPane.bottomAnchor="60.0"
-         AnchorPane.leftAnchor="14.0">
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Account Number"/>
-      <Label fx:id="sav_acc_num" text="3333 4000"/>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Withdrawal limit"/>
-      <Label fx:id="withdrawal_limit" text="20.00.00 vnd"/>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text created"/>
-      <Label fx:id="sav_acc_date" text="2024-03-03"/>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Balance"/>
-      <Label fx:id="sav_acc_bal" text="300.000.000 VND"/>
+   <Text layoutX="21.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saving account" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="353.0" />
+   <VBox layoutX="14.0" layoutY="370.0" prefHeight="300.0" prefWidth="450.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="14.0">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Account Number" />
+      <Label fx:id="sav_acc_num" text="3333 4000" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Withdrawal limit" />
+      <Label fx:id="withdrawal_limit" text="20.00.00 vnd" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text created" />
+      <Label fx:id="sav_acc_date" text="2024-03-03" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Balance" />
+      <Label fx:id="sav_acc_bal" text="300.000.000 VND" />
    </VBox>
-   <Text layoutX="492.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move funds to saving account"/>
-   <TextField fx:id="amount_to_sv" layoutX="477.0" layoutY="70.0" prefHeight="26.0" prefWidth="202.0"
-              AnchorPane.rightAnchor="142.60000000000002" AnchorPane.topAnchor="70.0"/>
-   <Button fx:id="btn_mount_to_sv" layoutX="477.0" layoutY="125.0" mnemonicParsing="false" prefHeight="26.0"
-           prefWidth="202.0" text="Gửi tiền" AnchorPane.rightAnchor="142.60000000000002" AnchorPane.topAnchor="125.0">
+   <Text layoutX="492.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move funds to saving account" />
+   <TextField fx:id="amount_to_sv" layoutX="477.0" layoutY="70.0" prefHeight="26.0" prefWidth="202.0" AnchorPane.rightAnchor="142.60000000000002" AnchorPane.topAnchor="70.0" />
+   <Button fx:id="btn_mount_to_sv" layoutX="477.0" layoutY="125.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="202.0" text="Gửi tiền" AnchorPane.rightAnchor="142.60000000000002" AnchorPane.topAnchor="125.0">
       <graphic>
-         <FontAwesomeIconView fill="WHITE" glyphName="ARROW_DOWN" size="20"/>
+         <FontAwesomeIconView fill="WHITE" glyphName="ARROW_DOWN" size="20" />
       </graphic>
    </Button>
-   <Text layoutX="492.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move funds to saving account"/>
-   <TextField fx:id="amount_to_ch" layoutX="484.0" layoutY="390.0" prefHeight="26.0" prefWidth="202.0"
-              AnchorPane.rightAnchor="135.60000000000002" AnchorPane.topAnchor="390.0"/>
-   <Button fx:id="btn_amount_to_ch" layoutX="483.0" layoutY="445.0" mnemonicParsing="false" prefHeight="26.0"
-           prefWidth="202.0" text="Rút tiền">
+   <Text layoutX="492.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move funds to saving account" />
+   <TextField fx:id="amount_to_ch" layoutX="484.0" layoutY="390.0" prefHeight="26.0" prefWidth="202.0" AnchorPane.rightAnchor="135.60000000000002" AnchorPane.topAnchor="390.0" />
+   <Button fx:id="btn_amount_to_ch" layoutX="483.0" layoutY="445.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="202.0" text="Rút tiền">
       <graphic>
-         <FontAwesomeIconView fill="WHITE" glyphName="ARROW_UP" size="20"/>
+         <FontAwesomeIconView fill="WHITE" glyphName="ARROW_UP" size="20" />
       </graphic>
    </Button>
 </AnchorPane>

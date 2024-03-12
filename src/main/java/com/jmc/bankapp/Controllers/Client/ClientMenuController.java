@@ -1,6 +1,7 @@
 package com.jmc.bankapp.Controllers.Client;
 
 import com.jmc.bankapp.Models.Model;
+import com.jmc.bankapp.Views.ClientMenuOption;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
@@ -14,6 +15,7 @@ public class ClientMenuController implements Initializable {
     public Button profile_btn;
     public Button logout_btn;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         addListener();
@@ -26,17 +28,17 @@ public class ClientMenuController implements Initializable {
     }
 
     private void onDashboard() {
-        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set("Dashboard");
+        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOption.DASHBOARD);
 
     }
 
     private void onTransactions(){
         System.out.println("Transactions");
-        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set("Transactions");
+        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOption.TRANSACTION);
     }
 
     private  void onAccounts(){
-        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set("Accounts");
+        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOption.ACCOUNTS);
 
     }
 }
