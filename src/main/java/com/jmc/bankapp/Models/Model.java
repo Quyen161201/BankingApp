@@ -2,6 +2,7 @@ package com.jmc.bankapp.Models;
 
 import com.jmc.bankapp.Views.AccountType;
 import com.jmc.bankapp.Views.ViewFactory;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 
 import java.sql.Date;
@@ -12,7 +13,7 @@ public class Model {
     public static Model model;
     private final ViewFactory viewFactory;
     private final DatabaseDriver databaseDriver;
-    private Client client;
+    public   Client client;
     private boolean clientSuccessLoginFlag;
 
     private boolean adminSuccessLoginFlag;
@@ -125,5 +126,59 @@ public class Model {
     {
         return databaseDriver.createClient(name,phone,password,birth_date,cccd,account_number_ch,account_number_sav,withdrawal_limit,sav_balance,ch_balance,transaction_limit);
     }
+
+
+    public void listClient(ObservableList<Client> clientObservableList)
+    {
+        CheckingAccount checkingAccount = null;
+        SavingAccount savingAccount = null;
+
+        ResultSet rs = databaseDriver.getClients();
+        ResultSet rs_saving_account= databaseDriver.getSavingAccount();
+        ResultSet rs_checking_account= databaseDriver.getCheckingAccount();
+        try {
+                while (rs.next()) {
+
+                    this.client.nameProperty().set(rs.getString("name"));
+                    this.client.phoneProperty().set(rs.getString("phone"));
+                    Date sqlDate = rs.getDate("birth_date");
+                    LocalDate localDate = sqlDate.toLocalDate();
+                    this.client.birth_dateProperty().set(localDate);
+                    this.client.cccdProperty().set(rs.getString("cccd"));
+                    this.client.passwordProperty().set(rs.getString("password"));
+
+
+                    if (rs_saving_account.next()) {
+                                savingAccount = new SavingAccount(
+                                rs_saving_account.getString("owner"),
+                                rs_saving_account.getString("account_number"),
+                                rs_saving_account.getDouble("balance"),
+                                rs_saving_account.getDouble("withdrawal_limit")
+                        );
+                        client.SavingAccountProperty().set(savingAccount);
+                    }
+
+                    if (rs_checking_account.next()) {
+                        checkingAccount = new CheckingAccount(
+                                rs_checking_account.getString("owner"),
+                                rs_checking_account.getString("account_number"),
+                                rs_checking_account.getDouble("balance"),
+                                rs_checking_account.getInt("transaction_limit")
+                        );
+                        client.CheckingAccountProperty().set(checkingAccount);
+
+                    }
+                    Client client = new Client(this.client.nameProperty().get(), this.client.phoneProperty().get(), this.client.birth_dateProperty().get(), this.client.cccdProperty().get(), this.client.passwordProperty().get(), savingAccount, checkingAccount);
+                    clientObservableList.add(client);
+                }
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }

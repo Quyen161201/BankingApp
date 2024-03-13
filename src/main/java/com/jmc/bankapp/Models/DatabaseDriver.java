@@ -31,6 +31,10 @@ public class DatabaseDriver {
         return rs;
     }
 
+
+
+
+
 //    adminSection
     public ResultSet getAdminData(String username, String password)
     {
@@ -95,6 +99,55 @@ public class DatabaseDriver {
         }
 
         return rs1+rs2+rs3;
+    }
+
+
+    public ResultSet getClients()
+    {
+        Statement statement;
+        ResultSet rs = null;
+
+        try {
+            statement = this.conn.createStatement();
+            rs = statement.executeQuery("select * from client");
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet getCheckingAccount()
+    {
+        Statement statement;
+        ResultSet rs = null;
+
+        try {
+            statement = this.conn.createStatement();
+            rs = statement.executeQuery("select * from checking_account");
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet getSavingAccount()
+    {
+        Statement statement;
+        ResultSet rs = null;
+
+        try {
+            statement = this.conn.createStatement();
+            rs = statement.executeQuery("select * from saving_account");
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
 }
