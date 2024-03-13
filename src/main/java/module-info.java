@@ -3,7 +3,7 @@ module com.jmc.bankapp {
     requires javafx.fxml;
     requires de.jensd.fx.glyphs.fontawesome;
     requires java.sql;
-    requires org.xerial.sqlitejdbc;
+    requires mysql.connector.java;
 
 
 

@@ -20,16 +20,16 @@
       <TextField fx:id="txt_name" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mật khẩu" />
       <TextField fx:id="txt_password" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Số thẻ" />
-      <TextField fx:id="txt_card_number" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ngày sinh" />
       <DatePicker fx:id="txt_date" prefHeight="42.0" prefWidth="257.0" styleClass="create_client_container_date" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Số điện thoại (Số tài khoản)" />
       <TextField fx:id="txt_phone" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Số CCCD" />
       <TextField fx:id="txt_cccd" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
-      <TextField fx:id="txt_email" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiền tài khoản" />
+      <TextField fx:id="txt_ch_amount" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiền tiết kiệm" />
+      <TextField fx:id="txt_sav_amount" />
       <Button fx:id="btn_create_client" mnemonicParsing="false" text="Tạo mới" />
       <Label fx:id="error_create_client" styleClass="error_lbl" text="Error" />
    </VBox>
