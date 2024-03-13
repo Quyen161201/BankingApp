@@ -121,9 +121,9 @@ public class Model {
         }
     }
 
-    public static   void main(String[] args) {
-        Model.getInstance().dataAdmin("admin","123123");
-
+    public int createDataClient(String name,String phone,String password,Date birth_date,String cccd,String account_number_ch,String account_number_sav,int withdrawal_limit,double sav_balance,double ch_balance, int transaction_limit)
+    {
+        return databaseDriver.createClient(name,phone,password,birth_date,cccd,account_number_ch,account_number_sav,withdrawal_limit,sav_balance,ch_balance,transaction_limit);
     }
 
 }

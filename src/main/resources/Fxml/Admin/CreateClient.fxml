@@ -31,6 +31,6 @@
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiền tiết kiệm" />
       <TextField fx:id="txt_sav_amount" />
       <Button fx:id="btn_create_client" mnemonicParsing="false" text="Tạo mới" />
-      <Label fx:id="error_create_client" styleClass="error_lbl" text="Error" />
+      <Label fx:id="error_create_client" styleClass="error_lbl" text="" />
    </VBox>
 </AnchorPane>
