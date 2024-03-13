@@ -30,17 +30,43 @@ public class LoginController implements Initializable {
         login_btn.setOnAction(event -> onLogin());
     }
 
+    //check login
     private void onLogin(){
 
         Stage stage =(Stage) error_lbl.getScene().getWindow();
-        Model.getInstance().getViewFactory().closeStage(stage);
+
 
         if(Model.getInstance().getViewFactory().getLoginAccountType()==AccountType.CLIENT)
         {
-            Model.getInstance().getViewFactory().showClientWindow();
+           Model.getInstance().dataClient(payee_address_field.getText(),password_field.getText());
+           if(Model.getInstance().getClientSuccessLoginFlag())
+           {
+               Model.getInstance().getViewFactory().showClientWindow();
+               Model.getInstance().getViewFactory().closeStage(stage);
+           }
+           else {
+               payee_address_field.setText("");
+               password_field.setText("");
+               error_lbl.setText("Tài khoản hoặc mật khẩu không chính xác ");
+           }
 
         }
-        else Model.getInstance().getViewFactory().showAdminWindow();
+        else {
+            Model.getInstance().dataAdmin(payee_address_field.getText(),password_field.getText());
+            if(Model.getInstance().getAdminSuccessLoginFlag())
+            {
+                Model.getInstance().getViewFactory().showAdminWindow();
+                Model.getInstance().getViewFactory().closeStage(stage);
+            }
+            else {
+                payee_address_field.setText("");
+                password_field.setText("");
+                error_lbl.setText("Tài khoản hoặc mật khẩu không chính xác ");
+            }
+
+        }
 
     }
+
+
 }
