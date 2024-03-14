@@ -135,7 +135,7 @@ public class ViewFactory {
     }
 
     public AnchorPane getClientsListView() {
-        if(clientsListView == null){
+
             try {
                 clientsListView = new FXMLLoader((getClass().getResource("/Fxml/Admin/Clients.fxml"))).load();
 
@@ -143,7 +143,7 @@ public class ViewFactory {
             catch (Exception e){
                 e.printStackTrace();
             }
-        }
+
         return clientsListView;
     }
 
@@ -184,4 +184,6 @@ public class ViewFactory {
             stage.close();
 
     }
+
+
 }

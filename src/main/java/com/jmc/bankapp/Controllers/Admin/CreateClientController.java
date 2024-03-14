@@ -1,11 +1,13 @@
 package com.jmc.bankapp.Controllers.Admin;
 
+import com.jmc.bankapp.Models.CheckingAccount;
+import com.jmc.bankapp.Models.Client;
 import com.jmc.bankapp.Models.Model;
+import com.jmc.bankapp.Models.SavingAccount;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.sql.Date;
@@ -26,12 +28,26 @@ public class CreateClientController implements Initializable {
     public TextField txt_ch_amount;
     public TextField txt_sav_amount;
 
+    public Client client;
+
+    public ListView<Client> listView;
+    public ObservableList<Client> clientObservableList;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
             btn_create_client.setOnAction(event -> onCreateClient());
     }
+    public CreateClientController(){
+        this.client = new Client("","",null,"","",null,null);
+    }
+    public Client getClient() {
+        return client;
+    }
 
-    private void onCreateClient() {
+    public void onCreateClient() {
+        CheckingAccount checkingAccount = null;
+        SavingAccount savingAccount = null;
         String name = txt_name.getText();
         String password = txt_password.getText();
         DatePicker datePk = new DatePicker();
@@ -63,9 +79,17 @@ public class CreateClientController implements Initializable {
 
         } else {
             error_create_client.setText("");
-           int rs=  Model.getInstance().createDataClient(name,phone,password,Date.valueOf(datePk.getValue()),cccd,generateRandomString(),generateRandomString(),20000000,Double.parseDouble(sav_amount),Double.parseDouble(ch_amount),10);
+             String sav_acc=generateRandomString();
+             String ch_acc=generateRandomString();
+           int rs=  Model.getInstance().createDataClient(name,phone,password,Date.valueOf(datePk.getValue()),cccd,ch_acc,sav_acc,20000000,Double.parseDouble(sav_amount),Double.parseDouble(ch_amount),10);
            if (rs > 2){
                error_create_client.setText("Tạo mới thành công");
+               savingAccount = new SavingAccount(name,sav_acc,Double.parseDouble(sav_amount),20000000);
+               checkingAccount = new CheckingAccount(name,ch_acc,Double.parseDouble(ch_amount),10);
+               client.CheckingAccountProperty().set(checkingAccount);
+               client.SavingAccountProperty().set(savingAccount);
+               Client client  = new Client(name, phone, Date.valueOf(datePk.getValue()).toLocalDate(), cccd, password, savingAccount, checkingAccount); //
+
            }
         }
     }

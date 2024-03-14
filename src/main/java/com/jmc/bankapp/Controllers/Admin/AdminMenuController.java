@@ -1,9 +1,16 @@
 package com.jmc.bankapp.Controllers.Admin;
 
+import com.jmc.bankapp.App;
+import com.jmc.bankapp.Controllers.LoginController;
 import com.jmc.bankapp.Models.Model;
 import com.jmc.bankapp.Views.AdminMenuOption;
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,6 +34,7 @@ public class AdminMenuController implements Initializable {
         admin_create_user.setOnAction(event -> createClient());
         admin_list_user.setOnAction(event -> listClient() );
         admin_deposit.setOnAction(event -> onDeposit());
+        admin_logout.setOnAction(event -> logout());
 
     }
 
@@ -42,4 +50,19 @@ public class AdminMenuController implements Initializable {
      {
          Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOption.DEPOSIT);
      }
+
+     public void logout()
+     {
+         Stage stage = (Stage) admin_logout.getScene().getWindow(); // Lấy stage của nút logout
+         stage.close();
+         Model.getInstance().getViewFactory().showLoginWindow();
+     }
+
+    public static Stage getCurrentStage(Node node) {
+        if (node == null) {
+            return null;
+        }
+        Stage stage = (Stage) node.getScene().getWindow();
+        return stage;
+    }
 }

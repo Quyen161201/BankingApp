@@ -128,6 +128,11 @@ public class Model {
     }
 
 
+    public  int deleteClient(String name){
+        return databaseDriver.deleteClient(name);
+    }
+
+
     public void listClient(ObservableList<Client> clientObservableList)
     {
         CheckingAccount checkingAccount = null;
@@ -178,6 +183,51 @@ public class Model {
             e.printStackTrace();
         }
 
+    }
+
+    public void searchCLient(String phone,ObservableList<Client> clientObservable){
+        CheckingAccount checkingAccount;
+        SavingAccount savingAccount;
+        ResultSet rs= databaseDriver.searchClient(phone);
+        try {
+            if(rs.isBeforeFirst())
+            {
+                while (rs.next())
+                {
+                    this.client.nameProperty().set(rs.getString("name"));
+                    this.client.phoneProperty().set(rs.getString("phone"));
+                    Date sqlDate = rs.getDate("birth_date");
+                    LocalDate localDate = sqlDate.toLocalDate();
+                    this.client.birth_dateProperty().set(localDate);
+                    this.client.cccdProperty().set(rs.getString("cccd"));
+                    this.client.passwordProperty().set(rs.getString("password"));
+                    this.clientSuccessLoginFlag = true;
+
+                    savingAccount = new SavingAccount(
+                            rs.getString("owner"),
+                            rs.getString("account_number"),
+                            rs.getDouble("balance"),
+                            rs.getDouble("withdrawal_limit")
+                    );
+                    client.SavingAccountProperty().set(savingAccount);
+
+                    checkingAccount = new CheckingAccount(
+                            rs.getString("owner"),
+                            rs.getString("account_number"),
+                            rs.getDouble("balance"),
+                            rs.getInt("transaction_limit")
+                    );
+                    client.CheckingAccountProperty().set(checkingAccount);
+                    Client client = new Client(this.client.nameProperty().get(), this.client.phoneProperty().get(), this.client.birth_dateProperty().get(), this.client.cccdProperty().get(), this.client.passwordProperty().get(), savingAccount, checkingAccount);
+                    clientObservable.add(client);
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
 

@@ -42,7 +42,9 @@ public class LoginController implements Initializable {
            if(Model.getInstance().getClientSuccessLoginFlag())
            {
                Model.getInstance().getViewFactory().showClientWindow();
+
                Model.getInstance().getViewFactory().closeStage(stage);
+
            }
            else {
                payee_address_field.setText("");
@@ -56,7 +58,9 @@ public class LoginController implements Initializable {
             if(Model.getInstance().getAdminSuccessLoginFlag())
             {
                 Model.getInstance().getViewFactory().showAdminWindow();
+
                 Model.getInstance().getViewFactory().closeStage(stage);
+
             }
             else {
                 payee_address_field.setText("");
@@ -67,6 +71,7 @@ public class LoginController implements Initializable {
         }
 
     }
+
 
 
 }

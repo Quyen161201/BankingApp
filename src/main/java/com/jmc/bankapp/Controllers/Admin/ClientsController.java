@@ -10,16 +10,22 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ClientsController implements Initializable {
     public ListView<Client> clients_listview;
     public AnchorPane listView_client;
+
+    private Client client;
     public ObservableList<Client> clientObservableList;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         clients_listview.setItems(clientObservableList);
         clients_listview.setCellFactory(listClient -> new ClientCellFactory());
+        System.out.println("ok");
+
     }
 
     public ClientsController()
@@ -27,16 +33,6 @@ public class ClientsController implements Initializable {
         clientObservableList = FXCollections.observableArrayList();
         Model.getInstance().listClient(clientObservableList);
 
-    }
-    private void printClientList() {
-        System.out.println("Danh sách khách hàng:");
-        for (Client client : clientObservableList) {
-            System.out.println(client.nameProperty() + " - " + client.phoneProperty()+" - " + client.CheckingAccountProperty().get().account_numberProperty());
-        }
-    }
 
-    public static void main(String[] args) {
-            ClientsController test = new ClientsController();
-            test.printClientList();
     }
 }

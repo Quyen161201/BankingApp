@@ -149,5 +149,34 @@ public class DatabaseDriver {
         }
         return rs;
     }
+    public int deleteClient(String name){
+        String sql = "DELETE FROM client WHERE name = ?";
+        PreparedStatement ps = null;
+        int rs=0;
+        try {
+            ps = this.conn.prepareStatement(sql);
+            ps.setString(1, name);
+            rs = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
 
+    public ResultSet searchClient( String phone)
+
+    {
+        Statement statement;
+        ResultSet rs = null;
+
+        try {
+            statement = this.conn.createStatement();
+            rs = statement.executeQuery("select * from client c , checking_account ca ,saving_account sa where c.name = ca.owner and c.name = sa.owner and c.phone ='" + phone + "'");
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
 }

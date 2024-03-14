@@ -21,7 +21,7 @@
             </graphic>
          </Button>
       </HBox>
-      <ListView prefHeight="200.0" prefWidth="820.0" />
+      <ListView fx:id="view_client" prefHeight="200.0" prefWidth="820.0" />
       <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="315.0" prefWidth="650.0">
          <styleClass>
             <String fx:value="search_box" />
