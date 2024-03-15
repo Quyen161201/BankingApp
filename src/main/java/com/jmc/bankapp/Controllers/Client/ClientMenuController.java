@@ -4,6 +4,7 @@ import com.jmc.bankapp.Models.Model;
 import com.jmc.bankapp.Views.ClientMenuOption;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,6 +26,7 @@ public class ClientMenuController implements Initializable {
         dashboard_btn.setOnAction(event -> onDashboard());
         transaction_btn.setOnAction(event -> onTransactions());
         account_btn.setOnAction(event ->onAccounts());
+        logout_btn.setOnAction(event ->logout());
     }
 
     private void onDashboard() {
@@ -37,8 +39,18 @@ public class ClientMenuController implements Initializable {
         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOption.TRANSACTION);
     }
 
+
+
     private  void onAccounts(){
         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOption.ACCOUNTS);
 
+    }
+
+    public void logout()
+    {
+        Stage stage = (Stage) logout_btn.getScene().getWindow(); // Lấy stage của nút logout
+        stage.close();
+        Model.getInstance().setClientSuccessLoginFlag(false);
+        Model.getInstance().getViewFactory().showLoginWindow();
     }
 }

@@ -55,6 +55,7 @@ public class AdminMenuController implements Initializable {
      {
          Stage stage = (Stage) admin_logout.getScene().getWindow(); // Lấy stage của nút logout
          stage.close();
+         Model.getInstance().setAdminSuccessLoginFlag(false);
          Model.getInstance().getViewFactory().showLoginWindow();
      }
 

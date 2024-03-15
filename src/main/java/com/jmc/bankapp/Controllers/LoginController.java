@@ -70,7 +70,6 @@ public class LoginController implements Initializable {
             if(Model.getInstance().getAdminSuccessLoginFlag())
             {
                 Model.getInstance().getViewFactory().showAdminWindow();
-
                 Model.getInstance().getViewFactory().closeStage(stage);
 
             }
