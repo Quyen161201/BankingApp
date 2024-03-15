@@ -174,9 +174,9 @@ public class ViewFactory {
         }
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/images/icon_bank.png"))));
+        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/images/hnpay-04.png"))));
         stage.setResizable(false);
-        stage.setTitle("Hà Nội Bank");
+
         stage.show();
 
     }

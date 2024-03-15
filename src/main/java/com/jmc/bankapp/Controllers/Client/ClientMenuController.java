@@ -33,7 +33,7 @@ public class ClientMenuController implements Initializable {
     }
 
     private void onTransactions(){
-        System.out.println("Transactions");
+
         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOption.TRANSACTION);
     }
 

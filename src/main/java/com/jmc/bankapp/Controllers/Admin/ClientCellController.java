@@ -57,7 +57,7 @@ public class ClientCellController implements Initializable {
 
     }
 
-    public boolean showConfirmDialog(String message) {
+    public static boolean showConfirmDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Xác nhận");
         alert.setHeaderText(null);

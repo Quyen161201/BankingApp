@@ -22,7 +22,7 @@
 }
 
 .search_box Button{
-    -fx-background-color : Linear-gradient(to right, #132A13, #253f25);
+    -fx-background-color : Linear-gradient(to right, #2e3191, #383ca6);
     -fx-effect : dropShadow(three-pass-box,#AAAAAA, 3,0,0,3);
     -fx-pref-width : 200;
     -fx-font-size : 1.6em;
@@ -37,15 +37,15 @@
 .result_box{
     -fx-spacing:15;
 }
-.list-view{
-    -fx-background-color: #EEEEEE;
-    -fx-border-width: 0;
-}
+.deposit_container .list-view{
+     -fx-background-color: #EEEEEE;
+     -fx-border-width: 0;
+ }
 
-.list-cell{
-    -fx-background-color : #EEEEEE;
-    -fx-padding: 20 0 20 0;
-    }
+.deposit_container .list-cell{
+     -fx-background-color: #EEEEEE;
+     -fx-padding: 10 0 10 0;
+ }
 
 .deposit_box{
     -fx-spacing: 20;

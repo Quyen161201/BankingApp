@@ -29,7 +29,7 @@
 .trans_amount_lbl{
     -fx-text-fill : #FFFFFF;
     -fx-font-weight: 700;
-    -fx-background-color: #132A13;
+    -fx-background-color: #2e3191;
     -fx-background-radius: 2;
     -fx-padding :5
 }

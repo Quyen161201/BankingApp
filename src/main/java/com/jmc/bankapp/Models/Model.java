@@ -3,7 +3,6 @@ package com.jmc.bankapp.Models;
 import com.jmc.bankapp.Views.AccountType;
 import com.jmc.bankapp.Views.ViewFactory;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TextField;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -75,7 +74,7 @@ public class Model {
         return client;
     }
 
-    public void dataClient(String username, String password)
+    public void dataClient(String username, String password,ObservableList<Client> clientObservable)
     {
         CheckingAccount checkingAccount;
         SavingAccount savingAccount;
@@ -91,8 +90,29 @@ public class Model {
                    this.client.birth_dateProperty().set(localDate);
                    this.client.cccdProperty().set(rs.getString("cccd"));
                    this.client.passwordProperty().set(rs.getString("password"));
+
+                   savingAccount = new SavingAccount(
+                           rs.getString("owner"),
+                           rs.getString("sa.account_number"),
+                           rs.getDouble("sa.balance"),
+                           rs.getString("phone"),
+                           rs.getDouble("withdrawal_limit")
+                   );
+                   client.SavingAccountProperty().set(savingAccount);
+
+                   checkingAccount = new CheckingAccount(
+                           rs.getString("owner"),
+                           rs.getString("ca.account_number"),
+                           rs.getDouble("ca.balance"),
+                           rs.getString("phone"),
+                           rs.getInt("transaction_limit")
+                   );
+                   client.CheckingAccountProperty().set(checkingAccount);
+                   Client client = new Client(this.client.nameProperty().get(), this.client.phoneProperty().get(), this.client.birth_dateProperty().get(), this.client.cccdProperty().get(), this.client.passwordProperty().get(), savingAccount, checkingAccount);
+                   clientObservable.add(client);
                    this.clientSuccessLoginFlag = true;
                }
+
 
            }
        }
@@ -101,6 +121,76 @@ public class Model {
            e.printStackTrace();
        }
     }
+
+    public int createTransaction(String sender,String receiver,double amount,String message)
+    {
+        return databaseDriver.createTransaction(sender,receiver,amount,message);
+
+    }
+
+    public void transactionList(String sender, ObservableList<Transaction> transactionObservableList){
+        ResultSet rs = databaseDriver.transactionList(sender);
+         try {
+             while (rs.next())
+             {
+                 Transaction transaction = new Transaction(
+                         rs.getString("sender"),
+                         rs.getString("receiver"),
+                         rs.getDouble("amount"),
+                         rs.getDate("date").toLocalDate(),
+                         rs.getString("message")
+                 );
+                 transactionObservableList.add(transaction);
+             }
+
+         }
+         catch (Exception e)
+         {
+             e.printStackTrace();
+         }
+    }
+
+    public  void savingAccountAndCheckingAccount(String phone,ObservableList<SavingAccount>savingAccounts,ObservableList<CheckingAccount>checkingAccounts)
+    {
+        ResultSet rs = databaseDriver.savingAccountAndCheckingAccount(phone);
+        SavingAccount savingAccount;
+        CheckingAccount checkingAccount;
+        try {
+            while (rs.next())
+            {
+                savingAccount = new SavingAccount(
+                        rs.getString("sa.owner"),
+                        rs.getString("sa.account_number"),
+                        rs.getDouble("sa.balance"),
+                        rs.getString("sa.phone"),
+                        rs.getDouble("sa.withdrawal_limit")
+                );
+                savingAccounts.add(savingAccount);
+                checkingAccount = new CheckingAccount(
+                        rs.getString("ca.owner"),
+                        rs.getString("ca.account_number"),
+                        rs.getDouble("ca.balance"),
+                        rs.getString("ca.phone"),
+                        rs.getInt("ca.transaction_limit")
+                );
+                checkingAccounts.add(checkingAccount);
+                System.out.println("rs"+rs.getString("ca.account_number"));
+
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean isPhoneClient(String phone){
+        boolean exist = databaseDriver.isPhoneClient(phone);
+        return exist;
+
+    };
+
+
 
 //    admin data
     public void dataAdmin(String username, String password)
@@ -132,6 +222,10 @@ public class Model {
         return databaseDriver.deleteClient(name);
     }
 
+    public int updateCheckingAccountBalance(String phone, double balance)
+    {
+        return databaseDriver.updateCheckingAccountBalance(phone,balance);
+    }
 
     public void listClient(ObservableList<Client> clientObservableList)
     {
@@ -154,20 +248,23 @@ public class Model {
 
 
                     if (rs_saving_account.next()) {
-                                savingAccount = new SavingAccount(
+                        savingAccount = new SavingAccount(
                                 rs_saving_account.getString("owner"),
                                 rs_saving_account.getString("account_number"),
                                 rs_saving_account.getDouble("balance"),
+                                rs_saving_account.getString("phone"),
                                 rs_saving_account.getDouble("withdrawal_limit")
                         );
                         client.SavingAccountProperty().set(savingAccount);
                     }
+
 
                     if (rs_checking_account.next()) {
                         checkingAccount = new CheckingAccount(
                                 rs_checking_account.getString("owner"),
                                 rs_checking_account.getString("account_number"),
                                 rs_checking_account.getDouble("balance"),
+                                rs_checking_account.getString("phone"),
                                 rs_checking_account.getInt("transaction_limit")
                         );
                         client.CheckingAccountProperty().set(checkingAccount);
@@ -183,6 +280,11 @@ public class Model {
             e.printStackTrace();
         }
 
+    }
+
+    public int updateSavingAccountBalance(String phone,double balance)
+    {
+        return databaseDriver.updateSavingAccountBalance(phone, balance);
     }
 
     public void searchCLient(String phone,ObservableList<Client> clientObservable){
@@ -207,6 +309,7 @@ public class Model {
                             rs.getString("owner"),
                             rs.getString("account_number"),
                             rs.getDouble("balance"),
+                            rs.getString("phone"),
                             rs.getDouble("withdrawal_limit")
                     );
                     client.SavingAccountProperty().set(savingAccount);
@@ -215,6 +318,7 @@ public class Model {
                             rs.getString("owner"),
                             rs.getString("account_number"),
                             rs.getDouble("balance"),
+                            rs.getString("phone"),
                             rs.getInt("transaction_limit")
                     );
                     client.CheckingAccountProperty().set(checkingAccount);
@@ -230,5 +334,9 @@ public class Model {
         }
     }
 
+    public int depositAccount (double balance, String phone)
+    {
+        return databaseDriver.setAmountDeposit(balance,phone);
+    }
 
 }

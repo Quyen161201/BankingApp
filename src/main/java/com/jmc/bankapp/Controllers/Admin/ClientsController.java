@@ -24,7 +24,7 @@ public class ClientsController implements Initializable {
 
         clients_listview.setItems(clientObservableList);
         clients_listview.setCellFactory(listClient -> new ClientCellFactory());
-        System.out.println("ok");
+
 
     }
 

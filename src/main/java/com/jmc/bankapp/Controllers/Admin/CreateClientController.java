@@ -15,6 +15,8 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.Random;
 
+import static com.jmc.bankapp.Controllers.Admin.ClientCellController.showAlert;
+
 
 public class CreateClientController implements Initializable {
     public TextField txt_name;
@@ -83,9 +85,9 @@ public class CreateClientController implements Initializable {
              String ch_acc=generateRandomString();
            int rs=  Model.getInstance().createDataClient(name,phone,password,Date.valueOf(datePk.getValue()),cccd,ch_acc,sav_acc,20000000,Double.parseDouble(sav_amount),Double.parseDouble(ch_amount),10);
            if (rs > 2){
-               error_create_client.setText("Tạo mới thành công");
-               savingAccount = new SavingAccount(name,sav_acc,Double.parseDouble(sav_amount),20000000);
-               checkingAccount = new CheckingAccount(name,ch_acc,Double.parseDouble(ch_amount),10);
+               showAlert("Thêm thành cônng", Alert.AlertType.INFORMATION);
+               savingAccount = new SavingAccount(name,sav_acc,Double.parseDouble(sav_amount),phone,20000000);
+               checkingAccount = new CheckingAccount(name,ch_acc,Double.parseDouble(ch_amount),phone,10);
                client.CheckingAccountProperty().set(checkingAccount);
                client.SavingAccountProperty().set(savingAccount);
                Client client  = new Client(name, phone, Date.valueOf(datePk.getValue()).toLocalDate(), cccd, password, savingAccount, checkingAccount); //
@@ -94,7 +96,7 @@ public class CreateClientController implements Initializable {
         }
     }
 
-    private boolean isNumeric(String str) {
+    public static boolean isNumeric(String str) {
         for (char c : str.toCharArray()) {
             if (!Character.isDigit(c)) {
                 return false;
